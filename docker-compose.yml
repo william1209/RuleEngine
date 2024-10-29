@@ -1,0 +1,23 @@
+
+services:
+  neo6j:
+    #build: .
+    image: ghcr.io/william1209/community-neo6j:latest
+    ports:
+      - 7474:7474
+      - 7687:7687
+    environment:
+       - NEO4J_AUTH=none
+       - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
+       - NEO4J_plugins_dir=/plugins
+    volumes:
+       - ${PWD}/conf/neo4j.conf:/conf/neo4j.conf
+       - ${PWD}/data:/data
+       - ${PWD}/logs:/logs
+       - ${PWD}/import/answers.csv:/import/answers.csv
+       - ${PWD}/import/training.csv:/import/training.csv
+       - ${PWD}/dependency/neo6j-engine-1.0-SNAPSHOT.jar:/plugins/neo6j-engine-1.0-SNAPSHOT.jar
+       - ${PWD}/dependency/commons-compiler-3.0.8.jar:/plugins/commons-compiler-3.0.8.jar
+       - ${PWD}/dependency/janino-3.0.8.jar:/plugins/janino-3.0.8.jar
+       #- $HOME/backups:/backups
+       
